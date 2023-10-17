@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .category {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        .dynamic-data {
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <h1>TELEMATIC CONTROL UNIT</h1>
+    
+    
+    <div class="header">
+        <a href="home.html">   <i class="fa-solid fa-house icon-space"></i>home</a>
+        <a href="dashboard.html"> <i class="fa-solid fa-bars-progress icon-space"></i>dashboard</a>
+        <a href="map.html"> <i class="fa-solid fa-location-dot icon-space"></i>location</a>
+        <a href="contact.html" ><i class="fa-solid fa-phone icon-space"></i>contact</a>
+    </div>
+
+    <div class="container">
+        <div class="category">
+            <h3>Vehicle Code</h3>
+            <p class="dynamic-data">SHI1212</p>
+        </div>
+        <div class="category">
+            <h2>Vehicle Status</h2>
+            <p class="dynamic-data" id="vehicle-status" style="color: green; font-weight: bold;">Running</p>
+        </div>
+        <div class="category">
+            <h2>Speed</h2>
+            <p class="dynamic-data" id="speed" style="color: green; font-weight: bold;">Current Speed: 60 mph</p>
+        </div>
+        <div class="category">
+            <h2>Fuel Level</h2>
+            <p class="dynamic-data">Fuel Remaining: 75%</p>
+        </div>
+        <div class="category">
+            <h2>Engine Health</h2>
+            <p class="dynamic-data" style="color: green;">Status: Good</p>
+        </div>
+        <div class="category">
+            <h2>Location</h2>
+            <p class="dynamic-data" id="location">Latitude: 40.7128° N<br>Longitude: -74.0060° W</p>
+        </div>
+        <div class="category">
+            <h2>Front Tire Pressure</h2>
+            <p class="dynamic-data">Pressure: 32 PSI</p>
+        </div>
+        <div class="category">
+            <h2>Rear Tire Pressure</h2>
+            <p class="dynamic-data">Pressure: 32 PSI</p>
+        </div>
+        <div class="category">
+            <h2>Engine Temperature</h2>
+            <p class="dynamic-data" id="engine-temperature">Temperature: 90°C</p>
+        </div>
+    </div>
+
+    <script>
+
+        setInterval(function() {
+            const tempElement= document.getElementById('engine-temperature');
+            let currentTemp = 75;
+
+    
+    // Randomly increase or decrease the temperature by 1°C
+    const change = Math.random() > 0.5 ? 1 : -1;
+    currentTemp += change;
+
+    // Ensure the temperature remains within the range of 70°C to 80°C
+    if (currentTemp < 70) currentTemp = 70;
+    if (currentTemp > 80) currentTemp = 80;
+
+    tempElement.textContent = `Engine Temperature: ${currentTemp}°C`; const speedElement = document.getElementById('speed');
+            const locationElement = document.getElementById('location');
+            const vehicleStatusElement = document.getElementById('vehicle-status');
+
+            const newTemperature = (Math.random() * 100).toFixed(2); // Simulated temperature update
+            const newSpeed = Math.floor(Math.random() * 100); // Simulated speed update
+            const newLatitude = (40.7128 + (Math.random() - 0.5) * 0.01).toFixed(6); // Simulated latitude update
+            const newLongitude = (-74.0060 + (Math.random() - 0.5) * 0.01).toFixed(6); // Simulated longitude update
+
+           
+            speedElement.textContent = `Current Speed: ${newSpeed} mph`;
+            locationElement.innerHTML = `Latitude: ${newLatitude}° N<br>Longitude: ${newLongitude}° W`;
+
+            // Update vehicle status based on speed
+            vehicleStatusElement.textContent = newSpeed > 0 ? 'Running' : 'Stopped';
+        }, 2000);
+    </script>
+     <footer style="text-align: center;">
+        <h4>  &copy; 2023 Team Misfits</h4>
+        <h5>All rights received </h5>
+    </footer>
+</body>
+</html>
